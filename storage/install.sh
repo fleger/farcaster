@@ -1,5 +1,11 @@
 #! /bin/bash
 
+# This program is free software. It comes without any warranty, to
+# the extent permitted by applicable law. You can redistribute it
+# and/or modify it under the terms of the Do What The Fuck You Want
+# To Public License, Version 2, as published by Sam Hocevar. See
+# http://sam.zoy.org/wtfpl/COPYING for more details.
+
 # Install script
 
 thisDir="""$(dirname "$0")"""
@@ -8,9 +14,9 @@ thisDir="""$(dirname "$0")"""
 
 for i in $(seq -f %02g 2); do
   # fstab.d mount rule
-  install -Dm644 "${thisDir}/90-shareddata$i" "${ROOT_DIR}${FSTAB_D_DIR}/90-shareddata$i" || exit 1
+  install -Dm644 "${thisDir}/90-shareddata$i" "${DESTDIR}${FSTAB_D_DIR}/90-shareddata$i" || exit 1
   # udev rule
-  install -Dm644 "${thisDir}/90-shareddata$i.rules" "${ROOT_DIR}${RULES_D_DIR}/90-shareddata$i.rules" || exit 1
+  install -Dm644 "${thisDir}/90-shareddata$i.rules" "${DESTDIR}${RULES_D_DIR}/90-shareddata$i.rules" || exit 1
   # mountpoint
-  install -d "${ROOT_DIR}/mnt/shareddata$i" || exit 1
+  install -d "${DESTDIR}/mnt/shareddata$i" || exit 1
 done
