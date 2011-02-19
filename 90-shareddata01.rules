@@ -1,0 +1,4 @@
+# shareddata01: Toshiba 1 To VFAT
+BUS=="usb", ATTRS{serial}=="00096747", KERNEL=="sd?1", \
+NAME="%k", SYMLINK+="shareddata01", GROUP="storage",   \
+RUN+="/bin/mount /dev/shareddata01"

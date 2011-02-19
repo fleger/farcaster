@@ -1,0 +1,4 @@
+# shareddata01: Maxell 640 Go ext4
+BUS=="usb", ATTRS{serial}=="201004210E43", KERNEL=="sd?1", \
+NAME="%k", SYMLINK+="shareddata02", GROUP="storage",   \
+RUN+="/bin/mount /dev/shareddata02"

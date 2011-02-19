@@ -1,0 +1,2 @@
+# Data Union - shareddata01 (Toshiba 1To)
+/dev/shareddata01   /mnt/shareddata01   vfat    defaults,nosuid,noexec,noatime,utf8,users,gid=users,uid=fleger,dmask=022,fmask=133  0   0

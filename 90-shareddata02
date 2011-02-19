@@ -1,0 +1,2 @@
+# Data Union - shareddata02 (Maxell 640 Go)
+/dev/shareddata02   /mnt/shareddata02   ext4    defaults,nosuid,noexec,noatime,users    0   0
