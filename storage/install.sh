@@ -8,15 +8,25 @@
 
 # Install script
 
+drives=(02 01)
+
 thisDir="""$(dirname "$0")"""
 : ${FSTAB_D_DIR:=/etc/fstab.d}
 : ${RULES_D_DIR:=/etc/udev/rules.d}
 
-for i in $(seq -f %02g 2); do
+mkdir -p "${DESTDIR}/etc/farcaster"
+shScript="FARCASTER_MOUNTPOINTS=("
+
+for i in "${drives[@]}"; do
   # fstab.d mount rule
   install -Dm644 "${thisDir}/90-shareddata$i" "${DESTDIR}${FSTAB_D_DIR}/90-shareddata$i" || exit 1
   # udev rule
   install -Dm644 "${thisDir}/90-shareddata$i.rules" "${DESTDIR}${RULES_D_DIR}/90-shareddata$i.rules" || exit 1
   # mountpoint
   install -d "${DESTDIR}/mnt/shareddata$i" || exit 1
+  shScript+="/mnt/shareddata$i"$'\n''                       '
 done
+shScript+=")"$'\n'
+echo "$shScript" > "${DESTDIR}/etc/farcaster/storage.conf"
+
+
