@@ -8,26 +8,24 @@
 
 # Install script
 
-drives=(02 01)
-
 thisDir="""$(dirname "$0")"""
 : ${FSTAB_D_DIR:=/etc/fstab.d}
 : ${RULES_D_DIR:=/etc/udev/rules.d}
 : ${CONFDIR:=/usr/local/etc/farcaster}
-: ${MNTDIR:=/mnt}
-mkdir -p "${DESTDIR}/${CONFDIR}"
-shScript="FARCASTER_MOUNTPOINTS=("
 
-for i in "${drives[@]}"; do
-  # fstab.d mount rule
-  install -Dm644 "${thisDir}/90-shareddata$i" "${DESTDIR}${FSTAB_D_DIR}/90-shareddata$i" || exit 1
-  # udev rule
-  install -Dm644 "${thisDir}/90-shareddata$i.rules" "${DESTDIR}${RULES_D_DIR}/90-shareddata$i.rules" || exit 1
-  # mountpoint
-  install -d "${DESTDIR}/${MNTDIR}/shareddata$i" || exit 1
-  shScript+="/${MNTDIR}/shareddata$i"$'\n''                       '
+declare -A INSTALL_DIRS=()
+
+INSTALL_DIRS=(["${thisDir}/fstab"]="${DESTDIR}${FSTAB_D_DIR}"
+              ["${thisDir}/udev"]="${DESTDIR}${RULES_D_DIR}"
+              ["${thisDir}/storage"]="${DESTDIR}${CONFDIR}/storage.d"
+)
+
+for d in "${!INSTALL_DIRS[@]}"; do
+  for i in "$d"/*; do
+    [ -f "$i" ] && install -Dm644 "$i" """${INSTALL_DIRS[$d]}/$(basename "$i")""" || exit 1
+  done
 done
-shScript+=")"$'\n'
-echo "$shScript" > "${DESTDIR}/${CONFDIR}/storage.conf"
 
-
+mkdir -p "${DESTDIR}${CONFDIR}"
+cat "${thisDir}/storage.in" | sed -e "s,@CONFDIR@,$CONFDIR,g" > "${DESTDIR}${CONFDIR}/storage.conf"
+chmod 644 "${DESTDIR}${CONFDIR}/storage.conf"

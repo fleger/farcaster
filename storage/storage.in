@@ -1,0 +1,9 @@
+declare -A FARCASTER_STORAGE_MOUNTPOINTS=()
+declare -a FARCASTER_STORAGE_SHARED=()
+declare -a FARCASTER_STORAGE_LOCAL=()
+
+for _f in "@CONFDIR@/storage.d"/*.conf ; do
+  [ -f "$_f" ] && source "$_f"
+done
+
+unset _f
