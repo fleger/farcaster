@@ -29,3 +29,10 @@ done
 mkdir -p "${DESTDIR}${CONFDIR}"
 cat "${thisDir}/storage.in" | sed -e "s,@CONFDIR@,$CONFDIR,g" > "${DESTDIR}${CONFDIR}/storage.conf"
 chmod 644 "${DESTDIR}${CONFDIR}/storage.conf"
+
+cat "${thisDir}/storage.in" | sed -e "s,@CONFDIR@,${DESTDIR}/${CONFDIR},g" > "${thisDir}/storage.tmp"
+. "${thisDir}/storage.tmp"
+
+for m in "${FARCASTER_STORAGE_MOUNTPOINTS[@]}"; do
+  mkdir -p "${DESTDIR}/${m}"
+done
