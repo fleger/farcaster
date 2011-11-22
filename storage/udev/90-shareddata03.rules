@@ -5,6 +5,6 @@
 # http://sam.zoy.org/wtfpl/COPYING for more details.
 
 # shareddata03: WD Elements 1.5 TB ext4
-BUS=="usb", ATTRS{serial}=="574D41565532333531393930", KERNEL=="sd?1", \
-NAME="%k", SYMLINK+="shareddata03", GROUP="storage",   \
+SUBSYSTEMS=="usb", ATTRS{serial}=="574D41565532333531393930", KERNEL=="sd?1", \
+SYMLINK+="shareddata03", GROUP="storage",   \
 RUN+="/bin/mount /dev/shareddata03"

@@ -5,6 +5,6 @@
 # http://sam.zoy.org/wtfpl/COPYING for more details.
 
 # shareddata01: Toshiba 1 TB ext4
-BUS=="usb", ATTRS{serial}=="00096747", KERNEL=="sd?1", \
-NAME="%k", SYMLINK+="shareddata01", GROUP="storage",   \
+SUBSYSTEMS=="usb", ATTRS{serial}=="00096747", KERNEL=="sd?1", \
+SYMLINK+="shareddata01", GROUP="storage",   \
 RUN+="/bin/mount /dev/shareddata01"
