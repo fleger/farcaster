@@ -5,6 +5,6 @@
 # http://sam.zoy.org/wtfpl/COPYING for more details.
 
 # shareddata04: Seagate 2 TB ext4
-SUBSYSTEMS=="usb", ATTRS{serial}=="5YD9MAFH", KERNEL=="sd?1", \
+SUBSYSTEMS=="usb", ATTRS{serial}=="NA4J4ZE8", KERNEL=="sd?1", \
 SYMLINK+="shareddata04", GROUP="storage",   \
 RUN+="/bin/mount /dev/shareddata04"
