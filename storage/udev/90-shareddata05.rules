@@ -6,5 +6,5 @@
 
 # shareddata05: Samsung 2 TB ext4
 SUBSYSTEMS=="usb", ATTRS{serial}=="00000000011E0A49", KERNEL=="sd?1", \
-SYMLINK+="shareddata0", GROUP="storage",   \
+SYMLINK+="shareddata05", GROUP="storage",   \
 RUN+="/bin/mount /dev/shareddata05"
